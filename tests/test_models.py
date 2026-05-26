@@ -6,41 +6,38 @@ import pytest
 
 from inflammation.models import daily_mean
 from inflammation.models import daily_max
-from inflammation.models import daily_min
+# from inflammation.models import daily_min
+
 
 @pytest.mark.parametrize(
-        "test_input, test_result",
-        [
-            ([[0,0],[0,0],[0,0]],[0,0]),
-            ([[1,2],[3,4],[5,6]],[3,4]),
-            (np.zeros((3,5)), np.zeros(5))
-        ]
+    "test_input, test_result",
+    [
+        ([[0, 0], [0, 0], [0, 0]], [0, 0]),
+        ([[1, 2], [3, 4], [5, 6]], [3, 4]),
+        (np.zeros((3, 5)), np.zeros(5)),
+    ],
 )
-
 def test_daily_mean(test_input, test_result):
     """Test that mean function works for both zeros anf integers"""
     npt.assert_array_equal(daily_mean(test_input), test_result)
 
 
 @pytest.mark.parametrize(
-        "test_input_max, test_result_max",
-        [
-            ([[0,0],[0,0],[0,0]],[0,0]),
-            ([[1,2],[3,4],[5,6]],[5,6]),
-            (np.zeros((3,5)), np.zeros(5))
-        ]
+    "test_input_max, test_result_max",
+    [
+        ([[0, 0], [7, 9], [0, 0]], [7, 9]),
+        ([[1, 2], [3, 4], [5, 6]], [5, 6]),
+        (np.zeros((3, 5)), np.zeros(5)),
+    ],
 )
-
-
 def test_daily_max(test_input_max, test_result_max):
     """Test that max function works for both zeros anf integers"""
     npt.assert_array_equal(daily_max(test_input_max), test_result_max)
 
 
-
 # def test_daily_mean_zeros():
 #     """Test that mean function works for an array of zeros."""
-    
+
 
 #     test_input = np.array([[0, 0],
 #                            [0, 0],
@@ -98,5 +95,3 @@ def test_daily_max(test_input_max, test_result_max):
 
 #     with pytest.raises(TypeError):
 #         error_expected = daily_mean(['Ciao', 'bello'])
-
-
