@@ -6,7 +6,7 @@ import pytest
 
 from inflammation.models import daily_mean
 from inflammation.models import daily_max
-# from inflammation.models import daily_min
+from inflammation.models import daily_min
 
 
 @pytest.mark.parametrize(
@@ -33,6 +33,20 @@ def test_daily_mean(test_input, test_result):
 def test_daily_max(test_input_max, test_result_max):
     """Test that max function works for both zeros anf integers"""
     npt.assert_array_equal(daily_max(test_input_max), test_result_max)
+
+
+@pytest.mark.parametrize(
+    "test_input, test_result",
+    [
+        ([[0, 0, 0], [0, 0, 0], [0, 0, 0]], [0, 0, 0]),
+        ([[1, 2, -1], [3, -2, 4], [5, -9, 6]], [1, -9, -1]),
+        ([[0, 1, 2], [0, 3, 4]], [0, 1, 2]),  # array containing zeros
+        ([[3, 3, 3], [3, 3, 3], [3, 3, 3]], [3, 3, 3]),  # all values the same
+    ],
+)
+def test_daily_min(test_input, test_result):
+    """Test that min function works for an array of positive and negative integers."""
+    npt.assert_array_equal(daily_min(test_input), test_result)
 
 
 # def test_daily_mean_zeros():
