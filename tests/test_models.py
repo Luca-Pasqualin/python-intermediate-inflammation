@@ -49,6 +49,12 @@ def test_daily_min(test_input, test_result):
     npt.assert_array_equal(daily_min(test_input), test_result)
 
 
+def test_daily_max_nan_propagation():
+    data = np.array([[1, np.nan], [3, 4]])
+    result = daily_max(data)
+    assert np.isnan(result[1])  # documents current behavior
+
+
 # def test_daily_mean_zeros():
 #     """Test that mean function works for an array of zeros."""
 
