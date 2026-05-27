@@ -44,14 +44,16 @@ def test_daily_max(test_input_max, test_result_max):
         ([[3, 3, 3], [3, 3, 3], [3, 3, 3]], [3, 3, 3]),  # all values the same
     ],
 )
-def test_daily_min(test_input, test_result):
+def test_daily_min(test_input: list[list[int]], test_result: list[int]):
     """Test that min function works for an array of positive and negative integers."""
     npt.assert_array_equal(daily_min(test_input), test_result)
 
 
 def test_daily_max_nan_propagation():
-    data = np.array([[1, np.nan], [3, 4]])
-    result = daily_max(data)
+    for i in range(2):
+        data = np.array([[1, np.nan], [3, 4]])
+        result = daily_max(data)
+
     assert np.isnan(result[1])  # documents current behavior
 
 
