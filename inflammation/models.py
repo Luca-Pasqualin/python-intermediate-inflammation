@@ -21,6 +21,10 @@ class Patient:
         """Compute body mass index: weight_kg / height_m ** 2"""
         return self.weight / self.height**2
 
+    def is_overweight(self):
+        """Return True if patient BMI is above 25, False otherwise."""
+        return self.get_body_mass_index() > 25
+
 
 def load_csv(filename):
     """Load a Numpy array from a CSV

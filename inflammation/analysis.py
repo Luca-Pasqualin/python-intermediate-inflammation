@@ -66,7 +66,7 @@ def analyse_data(data_source):
     # data = load_inflammation_data(data_dir)
     daily_standard_deviation = compute_standard_deviation_by_day(data)
     graph_data = {"standard deviation by day": daily_standard_deviation}
-    views.visualize(graph_data)
+    views.visualize(graph_data, None)
     return daily_standard_deviation
 
 
@@ -76,6 +76,7 @@ if __name__ == "__main__":
         description="Calculate standard deviation by day between datasets."
     )
 
+    outfile = os.path.basename
     # Add the data_dir argument
     parser.add_argument(
         "data_dir",
@@ -87,4 +88,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Run the function using the provided argument
-    analyse_data(args.data_dir)
+    data_source = CSVDataSource(args.data_dir)
+    analyse_data(data_source)
